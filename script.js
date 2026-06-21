@@ -552,3 +552,63 @@ if (summaryTableBody) {
       "Absent": s.absent,
       "On Duty": s.onduty,
       "Attendance %": s.percentage
+   }));
+    const ws = XLSX.utils.json_to_sheet(data);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Attendance Summary");
+    XLSX.writeFile(wb, "attendance_summary.xlsx");
+  }
+
+  function exportPdf() {
+    if (typeof window.jspdf === "undefined") {
+      alert("PDF export library did not load. Check your internet connection.");
+      return;
+    }
+    const rows = getVisibleSummaryRows();
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.setFontSize(14);
+    doc.text("ECE Attendance - Student-wise Percentage Report", 14, 15);
+
+    doc.autoTable({
+      startY: 22,
+      head: [["Register Number", "Student Name", "Present", "Absent", "On Duty", "Attendance %"]],
+      body: rows.map((s) => [s.reg, s.name, s.present, s.absent, s.onduty, s.percentage + "%"])
+    });
+
+    doc.save("attendance_summary.pdf");
+  }
+
+  function exportMonthlyCsv() {
+    if (!monthlyData.length) {
+      alert("Please load a monthly report first.");
+      return;
+    }
+    const headers = ["Register Number", "Student Name", "Present", "Absent", "On Duty", "Attendance %"];
+    const data = monthlyData.map((s) => [s.reg, s.name, s.present, s.absent, s.onduty, s.percentage]);
+    const csv = rowsToCSV(headers, data);
+    downloadFile("monthly_attendance_report.csv", csv, "text/csv;charset=utf-8;");
+  }
+   function init() {
+    setHeaderDate();
+    loadTodaySummary();
+    loadStudentSummary();
+
+    refreshBtn.addEventListener("click", loadTodaySummary);
+    if (logoutBtn) logoutBtn.addEventListener("click", logout);
+
+    searchAdvisor.addEventListener("input", renderSummaryTable);
+    lowAttendanceToggle.addEventListener("change", renderSummaryTable);
+
+    exportCsvBtn.addEventListener("click", exportCsv);
+    exportExcelBtn.addEventListener("click", exportExcel);
+    printBtn.addEventListener("click", () => window.print());
+    exportPdfBtn.addEventListener("click", exportPdf);
+
+    loadReportBtn.addEventListener("click", loadMonthlyReport);
+    exportMonthlyCsvBtn.addEventListener("click", exportMonthlyCsv);
+  }
+
+  document.addEventListener("DOMContentLoaded", init);
+}
