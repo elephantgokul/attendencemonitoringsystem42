@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - ECE Attendance Management System</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo-circle">ECE</div>
+      <h1>ECE ATTENDANCE MANAGEMENT SYSTEM</h1>
+    </div>
+    <div class="topbar-right">
+      <div class="date-pill" id="currentDate">📅 --</div>
+      <div class="total-pill" id="totalStudents">Total: 0</div>
+      <a href="advisor.html" class="nav-link">Advisor Dashboard</a>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="dashboard-card">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="class-title">III Year - ECE</h2>
+          <p class="class-sub" id="totalStudentsSub">Total Students: 0</p>
+        </div>
+
+        <div class="summary-cards">
+          <div class="summary-card present">
+            <span class="summary-icon">✔️</span>
+            <div>
+              <p class="summary-label">Present</p>
+              <p class="summary-count" id="presentCount">0</p>
+            </div>
+          </div>
+
+          <div class="summary-card absent">
+            <span class="summary-icon">❌</span>
+            <div>
+              <p class="summary-label">Absent</p>
+              <p class="summary-count" id="absentCount">0</p>
+            </div>
+          </div>
+
+          <div class="summary-card onduty">
+            <span class="summary-icon">🧑‍💼</span>
+            <div>
+              <p class="summary-label">On Duty</p>
+              <p class="summary-count" id="onDutyCount">0</p>
+            </div>
+          </div>
+        </div>
+
+        <button id="saveBtn" class="save-btn">💾 SAVE ATTENDANCE</button>
+      </div>
+
+      <!-- SEARCH + FILTER BAR -->
+      <div class="filter-bar">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search by Register Number or Name...">
+        <select id="filterStatus" class="filter-select">
+          <option value="All">All Status</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="On Duty">On Duty</option>
+        </select>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-wrapper">
+        <table class="attendance-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Register Number</th>
+              <th>Student Name</th>
+              <th>Attendance Status</th>
+            </tr>
+          </thead>
+          <tbody id="studentTableBody">
+            <!-- Rows injected by js/script.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="legend">
+        <span class="legend-item"><span class="dot present"></span> Present</span>
+        <span class="legend-item"><span class="dot absent"></span> Absent</span>
+        <span class="legend-item"><span class="dot onduty"></span> On Duty</span>
+      </div>
+
+      <p id="statusMsg" class="status-msg"></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 ECE Attendance System. All rights reserved.
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
