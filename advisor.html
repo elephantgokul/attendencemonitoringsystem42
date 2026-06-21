@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advisor Dashboard - ECE Attendance Management System</title>
+<link rel="stylesheet" href="css/style.css">
+
+<!-- Libraries used ONLY for Export Excel / Export PDF buttons -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo-circle">ECE</div>
+      <h1>ADVISOR DASHBOARD</h1>
+    </div>
+    <div class="topbar-right">
+      <div class="date-pill" id="currentDate">📅 --</div>
+      <a href="dashboard.html" class="nav-link">CR Dashboard</a>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- TODAY'S STATS -->
+    <section class="dashboard-card">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="class-title">III Year - ECE — Today's Status</h2>
+          <p class="class-sub" id="todayDateLabel">Loading...</p>
+        </div>
+
+        <div class="summary-cards">
+          <div class="summary-card total">
+            <span class="summary-icon">🧑‍🎓</span>
+            <div>
+              <p class="summary-label">Total Students</p>
+              <p class="summary-count" id="totalStudentsCount">56</p>
+            </div>
+          </div>
+
+          <div class="summary-card present">
+            <span class="summary-icon">✔️</span>
+            <div>
+              <p class="summary-label">Present Today</p>
+              <p class="summary-count" id="todayPresentCount">--</p>
+            </div>
+          </div>
+
+          <div class="summary-card absent">
+            <span class="summary-icon">❌</span>
+            <div>
+              <p class="summary-label">Absent Today</p>
+              <p class="summary-count" id="todayAbsentCount">--</p>
+            </div>
+          </div>
+
+          <div class="summary-card onduty">
+            <span class="summary-icon">🧑‍💼</span>
+            <div>
+              <p class="summary-label">On Duty Today</p>
+              <p class="summary-count" id="todayOnDutyCount">--</p>
+            </div>
+          </div>
+        </div>
+
+        <button id="refreshBtn" class="save-btn">🔄 REFRESH</button>
+      </div>
+      <p id="todayStatusMsg" class="status-msg"></p>
+    </section>
+
+    <!-- STUDENT-WISE ATTENDANCE PERCENTAGE -->
+    <section class="dashboard-card">
+      <div class="section-header-row">
+        <h2 class="class-title">Student-wise Attendance Percentage</h2>
+        <label class="checkbox-label">
+          <input type="checkbox" id="lowAttendanceToggle">
+          Show only Low Attendance (&lt; 75%)
+        </label>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="searchAdvisor" class="search-input" placeholder="🔍 Search by Register Number or Name...">
+      </div>
+
+      <div class="export-bar">
+        <button id="exportCsvBtn" class="btn-outline">⬇️ Export CSV</button>
+        <button id="exportExcelBtn" class="btn-outline">⬇️ Export Excel</button>
+        <button id="printBtn" class="btn-outline">🖨️ Print Report</button>
+        <button id="exportPdfBtn" class="btn-outline">⬇️ Download PDF</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="attendance-table" id="summaryTable">
+          <thead>
+            <tr>
+              <th>Register Number</th>
+              <th>Student Name</th>
+              <th>Present</th>
+              <th>Absent</th>
+              <th>On Duty</th>
+              <th>Attendance %</th>
+            </tr>
+          </thead>
+          <tbody id="summaryTableBody">
+            <!-- injected by js/script.js -->
+          </tbody>
+        </table>
+      </div>
+      <p id="summaryStatusMsg" class="status-msg"></p>
+    </section>
+
+    <!-- MONTHLY REPORT -->
+    <section class="dashboard-card no-print">
+      <h2 class="class-title">Monthly / Date-Range Attendance Report</h2>
+
+      <div class="filter-bar">
+        <label class="range-label">From: <input type="date" id="startDate" class="date-input"></label>
+        <label class="range-label">To: <input type="date" id="endDate" class="date-input"></label>
+        <button id="loadReportBtn" class="save-btn">📊 LOAD REPORT</button>
+        <button id="exportMonthlyCsvBtn" class="btn-outline">⬇️ Export This Report (CSV)</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="attendance-table" id="monthlyTable">
+          <thead>
+            <tr>
+              <th>Register Number</th>
+              <th>Student Name</th>
+              <th>Present</th>
+              <th>Absent</th>
+              <th>On Duty</th>
+              <th>Attendance % (in range)</th>
+            </tr>
+          </thead>
+          <tbody id="monthlyTableBody">
+            <tr><td colspan="6" style="text-align:center; color:#888;">Select a date range and click "Load Report"</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p id="monthlyStatusMsg" class="status-msg"></p>
+    </section>
+
+  </main>
+
+  <footer class="footer no-print">
+    &copy; 2026 ECE Attendance System. All rights reserved.
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
