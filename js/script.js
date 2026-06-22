@@ -4,7 +4,7 @@
    ========================================================= */
 
 /* PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE */
-const SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwJzcqf7pXOvwAf4ksHFLC19b0FSQHxyzG5o169kgM8bGSDmTJ5DWHCRajRKPlOG1sSXg/exec";
 
 /* LOGIN CREDENTIALS */
 const USERS = {
