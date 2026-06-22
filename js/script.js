@@ -4,7 +4,7 @@
    ========================================================= */
 
 /* PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE */
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxcc_jRBXm8n3ArVPp73vmI_rxKz6PaUH7MM7DZM2Nwh3rEYWFXoRlAniB8GdPduJ1BWQ/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3U6CLDIrTO8bA65ryYnGl1Jzx8UCSW7YejudyVsBkc8lxeh8G6MsTmIMzODO97D4zpg/exec";
 
 /* LOGIN CREDENTIALS */
 const USERS = {
