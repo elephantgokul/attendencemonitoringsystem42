@@ -569,7 +569,7 @@ if (summaryTableBody) {
     const doc = new jsPDF();
 
     doc.setFontSize(14);
-    doc.text("ECE Attendance - Student-wise Percentage Report", 14, 15);
+    doc.text("VLSI Attendance - Student-wise Percentage Report", 14, 15);
 
     doc.autoTable({
       startY: 22,
