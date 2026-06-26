@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f1f3d">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Dashboard - VLSI Attendance Management System</title>
+<link rel="stylesheet" href="css/style.css">
+
+<!-- ===== AUTH GUARD (runs before page paints — fixes "flash of protected
+     content" and blocks direct-URL access by non-CR roles) ===== -->
+<script>
+  (function () {
+    var loggedIn = sessionStorage.getItem("loggedIn") === "true";
+    var role = sessionStorage.getItem("role");
+    if (!loggedIn || role !== "cr") {
+      window.location.replace("login.html");
+    }
+  })();
+  // Re-check if this page is restored from back/forward cache after logout
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+      var loggedIn = sessionStorage.getItem("loggedIn") === "true";
+      var role = sessionStorage.getItem("role");
+      if (!loggedIn || role !== "cr") {
+        window.location.replace("login.html");
+      }
+    }
+  });
+</script>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-logo-circle">VLSI</div>
+      <h1>VLSI ATTENDANCE MANAGEMENT SYSTEM</h1>
+    </div>
+    <div class="topbar-right">
+      <div class="date-pill" id="currentDate">📅 --</div>
+      <div class="total-pill" id="totalStudents">Total: 0</div>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section class="dashboard-card">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="class-title">III Year - VLSI</h2>
+          <p class="class-sub" id="totalStudentsSub">Total Students: 0</p>
+        </div>
+
+        <div class="summary-cards">
+          <div class="summary-card present">
+            <span class="summary-icon">✔️</span>
+            <div>
+              <p class="summary-label">Present</p>
+              <p class="summary-count" id="presentCount">0</p>
+            </div>
+          </div>
+
+          <div class="summary-card absent">
+            <span class="summary-icon">❌</span>
+            <div>
+              <p class="summary-label">Absent</p>
+              <p class="summary-count" id="absentCount">0</p>
+            </div>
+          </div>
+
+          <div class="summary-card onduty">
+            <span class="summary-icon">🧑‍💼</span>
+            <div>
+              <p class="summary-label">On Duty</p>
+              <p class="summary-count" id="onDutyCount">0</p>
+            </div>
+          </div>
+        </div>
+
+        <button id="saveBtn" class="save-btn">💾 SAVE ATTENDANCE</button>
+      </div>
+
+      <!-- EDIT OLD ATTENDANCE -->
+      <div class="filter-bar">
+        <label class="range-label">📝 Editing attendance for:
+          <input type="date" id="attendanceDateInput" class="date-input">
+        </label>
+        <button id="loadDateBtn" class="btn-outline">🔄 Load This Date</button>
+      </div>
+      <p id="editNoticeMsg" class="status-msg"></p>
+
+      <!-- SEARCH + FILTER BAR -->
+      <div class="filter-bar">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search by Register Number or Name...">
+        <select id="filterStatus" class="filter-select">
+          <option value="All">All Status</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="On Duty">On Duty</option>
+        </select>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-wrapper">
+        <table class="attendance-table">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Register Number</th>
+              <th>Student Name</th>
+              <th>Attendance Status</th>
+            </tr>
+          </thead>
+          <tbody id="studentTableBody">
+            <!-- Rows injected by js/script.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="legend">
+        <span class="legend-item"><span class="dot present"></span> Present</span>
+        <span class="legend-item"><span class="dot absent"></span> Absent</span>
+        <span class="legend-item"><span class="dot onduty"></span> On Duty</span>
+      </div>
+
+      <p id="statusMsg" class="status-msg"></p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    &copy; 2026 VLSI Attendance System. All rights reserved.
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
