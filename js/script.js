@@ -7,7 +7,7 @@
    STEP 1: PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
    (must end in /exec)
 ----------------------------------------------------------- */
-const SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTTMAjsdkjgS9_UFS9dOicxhCLlDwA8A0_2zdUYgVc4u1fSqKyEKMCbw3I3KuY-KZONA/exec";
 
 /* -----------------------------------------------------------
    STEP 2: SHARED SECRET TOKEN
